@@ -1,0 +1,23 @@
+<!doctype html>
+<head>
+  <title>MediaRecorder examples - Get a video stream from canvas</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="app.js"></script>
+  <script src="https://cdn.ravenjs.com/3.25.2/raven.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <script>
+    Raven.config('https://a17fe01d50ef413eb4da53753adefe44@sentry.io/1209762').install()
+    Raven.context(function () {
+    //initMyApp();
+    });
+  </script>
+<canvas id="canvas" width="600" height="300"></canvas>
+<br>
+<div>
+<button id="prev" onclick="prev()">prev</button>
+<button id="next" onclick="next()">next</button>
+<button id="rec" onclick="startRecording()">record</button>
+</div>
+</body>
