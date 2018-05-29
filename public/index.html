@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MediaRecorder examples - Get a video stream from canvas</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <script src="https://cdn.ravenjs.com/3.25.2/raven.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/blob-polyfill/2.0.20171115/Blob.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.7.2/redux.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <link href="/styles.css" rel="stylesheet" type="text/css">
+  <link href="/name.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!--   <script>
+     Raven.config('https://a17fe01d50ef413eb4da53753adefe44@sentry.io/1209762').install()
+     Raven.context(function () {
+     //initMyApp();
+     });
+  </script> -->
+  <div class="wrapper">
+    <div id="selectors">
+      <div id="select-student">
+        <div class="dropdown">
+            <div id="myDropdown" class="dropdown-content">
+              <input type="text" placeholder="What's your name?" id="myInput" onkeyup="filterFunction()">
+              <div class="hidden" id="nameList">
+              </div>
+            </div>
+      </div>
+      </div>
+
+        <div id="name-container"></div>
+        
+        <div id="select-books" onclick="clickBooks()">
+          What's your book?
+        </div>
+        <div id="book-list">
+          <div id="book-list-header">
+          <span id="close-books"><i class="material-icons">close</i></span>
+          </div>
+          <div id="book-list-data"></div>         
+        </div>
+      </div>
+
+    <div id="book-select"></div>
+    <canvas height="300" id="canvas" width="700"></canvas>
+    <div id="vid-holder"></div><br>
+    <div id="buttons">
+      <button class="button" id="prev" onclick="prev()"><i class="material-icons chevron">
+chevron_left
+</i></button> <button class="button" id="next" onclick="next()"><i class="material-icons chevron">
+chevron_right
+</i></button> <button class="button" id="rec" onclick="startRecording()">Start</button>
+    </div>
+    <a id="download-button" download="jason">Download</a>
+  </div>
+  <script src="creds.js"></script> 
+  <script src="recording.js"></script> 
+  <script src="nameList.js"></script> 
+  <script src="data.js"></script> 
+  <script src="books.js"></script> 
+  <script src="nameReducer.js"></script> 
+  <script src="bookReducer.js"></script>
+  <script src="updateCanvas.js"></script>
+  <script src="redux.js"></script>
+
+
+
+  <div id="mocha"><p><a href=".">Index</a></p></div>
+  <div id="messages"></div>
+  <div id="fixtures"></div>
+  <script 
+  src="https://cdnjs.cloudflare.com/ajax/libs/mocha/5.2.0/mocha.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.1.2/chai.min.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script src="books.js"></script>
+  <script src="test.js"></script>
+  <script>mocha.run();</script>
+
+</body>
+</html>
