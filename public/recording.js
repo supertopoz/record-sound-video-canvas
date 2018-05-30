@@ -2,7 +2,8 @@ var stream, video;
 
 window.onload = function () {
   // get audio stream from user's mic
-  creatNameList()
+ // creatNameList()
+  getData()
   newCanvas()
 };
 
@@ -52,13 +53,15 @@ class BuildRecorder {
   startCanvasAnim(){
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d'); 
-      ctx.fillStyle = 'rgb(200, 200, 200)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);  
-    const draw = () => {  
-      requestAnimationFrame(draw);
+
+    const draw = () => { 
+    requestAnimationFrame(draw); 
+    ctx.fillRect(0, 0, ctx.height, ctx.width); 
+    ctx.fillStyle = '#3498db'; 
+      
       var width = this.video.videoWidth/2.8;
       var height = this.video.videoHeight/2.8;
-      ctx.drawImage(this.video, 10, 10, width,height);     
+      ctx.drawImage(this.video, 10, 10, width,height); 
   };
   draw();
   }
@@ -106,7 +109,7 @@ class BuildRecorder {
     //document.body.insertBefore(document.createTextNode('no data saved'), canvas);
   }
 }
-    stopRecording() {
+    stopRecording() {  
     this.recorder.stop();
   }
 }

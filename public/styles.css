@@ -1,3 +1,15 @@
+#header{
+    background: #9b59b6;
+    height: 51px;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 2%;
+    font-family: roboto;
+    letter-spacing: 10px;
+    font-weight: 100;
+}
+
 #mocha{
   max-width: 700px;
   font-size: 12px;
@@ -13,69 +25,74 @@ body{
     display: grid;
     margin: 0 auto;
     width: 700px;
+    grid-gap: 5px;
+}
+
+#canvas{
+  background-color: '#3498db !important';
 }
 
 #selectors{
   display:grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  height: 100px;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  height: 70px;
   cursor: pointer;
 }
 
 #select-books{
-    color: green;
-    box-shadow: 2px 2px 1px 0px #9E9E9E;
-    border-radius: 4px;
-    background: white;
-    border: 1px solid;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 28px;
+    color: white;
+    align-self: center;
+    padding-top: 23px;
+    font-family: roboto;
+    letter-spacing: 2px;
+    font-weight: 100;
     cursor: pointer;
     text-align: center;
+    background: #308fce;
+    box-shadow: 1px 1px 1px #717070;
+    height: 37px;
+    cursor: pointer;
+    font-size: 12px;
 
 }
 
-button#prev {
-    color: green;
-    box-shadow: 2px 2px 1px 0px #9E9E9E;
-    border-radius: 4px;
-    background: white;
+#prev {
+    color: #3498db;
+    border:none;
+    font-size: 82px;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px #717070;
 }
 
-button#next {
-    color: green;
-    box-shadow: 2px 2px 1px 0px #9E9E9E;
-    border-radius: 4px;
-    background: white;
+#next {
+    color: #3498db;
+    border:none;
+    font-size: 82px;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px #717070;
 }
 
-button#rec {
-    color: red;
-    box-shadow: 2px 2px 1px 0px #9E9E9E;
-    border-radius: 4px;
-    background: white;
+#rec {
+    color: white;
+    box-shadow: 1px 1px 1px #717070;
+    font-family: roboto;
+    letter-spacing: 2px;
+    font-weight: 100;
+    font-size: 12px;
+    background: #9b59b6;
+    height: 35px;
+    align-self: center;
+    text-align: center;
+    padding-top: 25px;
+    cursor: pointer;
 }
-
-canvas#canvas{
-  box-shadow: 2px 2px 1px 0px #9E9E9E;
-}
-
 
 #buttons{
-  display: none;
+ /* display: none;*/
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.button{
-  background: none;
-  border: 1px solid;
-  margin: 10px;
-  padding: 10px;
-  font-size: 40px;
-  cursor: pointer;
-}
 
 /* ---- The container of student books ---- */
 .container {
@@ -100,7 +117,6 @@ canvas#canvas{
   text-align: right;
   padding: 7px;
   color:white;
-  color:green;
 }
 
 
@@ -110,14 +126,16 @@ canvas#canvas{
   position: absolute;
   top: 10%;
   display:grid;
-  background: white;
+  background: #9b59b6;
   z-index: 100;
   padding: 10px;
   display: none;
-  left: calc(50% - 200px);
+  left: calc(50% - 230px);
   box-shadow: 7px 13px 20px 2px #191919;
-  border: 1px solid green;
-  border-radius: 2px;
+}
+
+#buttons{
+  display: none;
 }
 
 .container{
@@ -126,6 +144,12 @@ canvas#canvas{
   width: 400px; 
   overflow: hidden;
   text-overflow: ellipsis; 
+  font-family: roboto;
+  letter-spacing: 2px;
+  font-weight: 100;
+  font-size: 15px;
+  color:white;
+  height: 20px;
 }
 
 /* Hide the browser's default checkbox */
@@ -141,8 +165,8 @@ canvas#canvas{
     position: absolute;
     top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     background-color: #eee;    
 }
 
@@ -162,8 +186,7 @@ canvas#canvas{
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-
-    background-color: green;
+    background-color: #3498db;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -180,8 +203,8 @@ canvas#canvas{
 
 /* Style the checkmark/indicator */
 .container .checkmark:after {
-    left: 9px;
-    top: 5px;
+    left: 6px;
+    top: 2px;
     width: 5px;
     height: 10px;
     border: solid white;
@@ -192,11 +215,9 @@ canvas#canvas{
 }
 
 #download-button {
-    color: green;
+    color: white;
     box-shadow: 2px 2px 1px 0px #9E9E9E;
-    border-radius: 4px;
-    background: white;
-    border: 1px solid;
+    background: #308fce;
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 10px;
@@ -205,6 +226,9 @@ canvas#canvas{
     text-align: center;
     display:none;
     text-decoration: none;
+    font-family: roboto;
+    letter-spacing: 2px;
+    font-weight: 100;
 }
 
 i.material-icons.chevron {

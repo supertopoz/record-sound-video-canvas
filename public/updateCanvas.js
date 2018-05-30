@@ -30,12 +30,12 @@ function updateCanvas(image = '', imageArrayLength){
   if(!imageArrayLength) image = './assets/blank.png';
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
-  context.fillStyle = 'rgb(200, 200, 200)';  
-  context.canvas.width = context.canvas.width;
   var img = new Image();          
     img.src = image
+    context.fillRect(0, 0, context.canvas.width, context.canvas.height); 
+    context.fillStyle = '#3498db'; 
     img.addEventListener('load', function() {
-       context.drawImage(img, 255, 10, img.width/1.2, img.height/1.2);
+         context.drawImage(img, 260, 10, img.width/1.2, img.height/1.2);
     }, false);
   return img;  
 }

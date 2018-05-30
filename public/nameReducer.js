@@ -64,7 +64,7 @@ document.addEventListener('click', function(e){
 
 document.addEventListener('click', function(e){
   var element = document.getElementById("nameList");
-  if(e.target.id === "myInput"){   
+  if(e.target.id === "myInput"){ 
     element.className = ("show");
   } 
   else  {

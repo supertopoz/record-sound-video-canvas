@@ -1,4 +1,4 @@
-var expect = chai.expect;
+/*var expect = chai.expect;
 
 describe("Book interface", function() {
   describe("updateBooksListHTML", function() {
@@ -104,4 +104,4 @@ describe("Book interface", function() {
     });
   });
 
-});
+});*/

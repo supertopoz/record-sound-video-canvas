@@ -38,19 +38,21 @@ const localData = {
   }
 }
 
-
-var spreadsheetID = "1vuwPqV4Ib1sTxFUPUsuCIeNqd8TJcMcZDcVM9b1sH5s";
+var getData = function () {
+//var spreadsheetID = "1vuwPqV4Ib1sTxFUPUsuCIeNqd8TJcMcZDcVM9b1sH5s";
+var spreadsheetID = "1tSHLkllPSvPOMebuyvm8wxzKFM6_1DG1btXAEfO68XA";
 var studentUrl = "https://spreadsheets.google.com/feeds/list/" + 
-                  spreadsheetID +"/2/public/values?alt=json";
+                  spreadsheetID +"/1/public/values?alt=json";
 var bookUrl = "https://spreadsheets.google.com/feeds/list/" + 
                  spreadsheetID +"/3/public/values?alt=json";
+
+
 var studentDetails = function(url){
   console.log(new Date())
-  return new Promise((resolve,reject)=>{
+  return new Promise((resolve,reject)=> {
     axios.get(url).then((x)=>{
       console.log(x)
-      resolve(x)
-      
+      resolve(x)      
     }).catch(err =>{
       reject(err)
     })
@@ -60,7 +62,7 @@ var studentDetails = function(url){
 var bookDetails = function(url){
     
   return new Promise((resolve,reject)=>{
-    axios.get(url, function(x){
+    fetch(url, function(x){
     }).then((x)=>{ 
       resolve(x)  
     }).catch(err =>{
@@ -94,3 +96,5 @@ studentDetails(studentUrl).then(function(values){
   creatNameList(studentList)
   // store the student list in the state
 });
+
+}
