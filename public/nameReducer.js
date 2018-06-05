@@ -58,14 +58,19 @@ const nameReducer = (state, actions) => {
 document.addEventListener('click', function(e){
   if(e.target.className=="nameItem"){
    var name = e.target.innerHTML;
+   var bookSelector = document.getElementById('select-books');
+   bookSelector.style.display = 'grid'
+   reset()
    updateData.dispatch({type:'ADD_TO_NAME_LIST','value':name});
   }
 })
 
 document.addEventListener('click', function(e){
   var element = document.getElementById("nameList");
+  
   if(e.target.id === "myInput"){ 
     element.className = ("show");
+    scrollWin();
   } 
   else  {
     element.className = ("hidden");
@@ -74,7 +79,8 @@ document.addEventListener('click', function(e){
 
 document.addEventListener('click', function(e){
  // var element = document.getElementByClassName("remove-student");
-  if(e.target.className.indexOf("remove-student") >= 0 ){   
+  if(e.target.className.indexOf("remove-student") >= 0 ){  
+    reset() 
     var index = e.target.id.replace('student_','');
     updateData.dispatch({type:'REMOVE_NAME_FROM_LIST','value':index});
   }
@@ -82,7 +88,6 @@ document.addEventListener('click', function(e){
 
 
 const updateStudentList = function(names){
-  
   var html = ''
   names.forEach(function(item, index){
     html += `<span class="student-name">
@@ -96,10 +101,13 @@ const updateStudentList = function(names){
 
 const updateDownloadButton = function(data){
   var selectors = document.getElementById('selectors');
+  var names = document.getElementById('name-container');
   if(data.downloadURL !== '') {
   //  selectors.style.display = 'none'
     selectors.style['pointer-events'] = 'none'
+    names.style['pointer-events'] = 'none'
     selectors.style.opacity = '0.4'    
+    names.style.opacity = '0.4'    
   }
   let today = new Date().toISOString().slice(0, 10)
   var names = data.nameList.join("-")

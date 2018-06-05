@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MediaRecorder examples - Get a video stream from canvas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Speaking</title>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <script src="https://cdn.ravenjs.com/3.25.2/raven.min.js">
@@ -15,6 +16,7 @@
       rel="stylesheet">
   <link href="/styles.css" rel="stylesheet" type="text/css">
   <link href="/name.css" rel="stylesheet" type="text/css">
+  <link href="/books.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <!--   <script>
@@ -24,38 +26,48 @@
      });
   </script> -->
   <div class="wrapper">
-    <div id="header">MY STORY MAKER</div>
-    <div id="selectors">
-      <div id="select-student">
-        <div class="dropdown">
+    <div  id="header">MY SPEAKING</div>
+    <img style="margin: 0 auto" id="start-loader" src="/assets/loader.gif" />
+    <div onclick="newCanvas()" id="vidSound">I'm Ready!!!</div>
+    <div id="main-body" style="display: none" class="ui-wrapper">
+      <div id="selectors">
+        <div id="select-student">
+          <div class="dropdown">
             <div id="myDropdown" class="dropdown-content">
               <input type="text" placeholder="What's your name?" id="myInput" onkeyup="filterFunction()">
-              <div class="hidden"  id="nameList">
-              </div>
+              <div class="hidden"  id="nameList"></div>
             </div>
-      </div>
-      </div>
-        <div id="select-books" onclick="clickBooks()">
-          What's your book?
-        </div>        
-        <div id="book-list">
-          <div id="book-list-inner">
-          <div id="book-list-header">
-          <span id="close-books"><i class="material-icons">close</i></span>
           </div>
-          <div id="book-list-data"></div> 
-          </div>        
         </div>
-      </div>
- <div id="name-container"></div>
-    <div id="book-select"></div>
-    <canvas style="background: #3498db" height="300" id="canvas" width="700"></canvas>
-    <div id="vid-holder"></div>
-    <div id="buttons">
-      <div class="button" id="prev" onclick="prev()">◀</div>
-      <div class="button" id="next" onclick="next()">▶</div> <div class="button" id="rec" onclick="startRecording()">START</div>
+        <div style="display:none; position: relative;" id="select-books" onclick="clickBooks()">
+        What's your book?
+          <div id="book-list">
+            <div id="book-list-inner">
+            <div id="book-list-header">
+              <span >
+                <i id="close-books" class="material-icons">close</i>
+              </span>
+            </div>
+            <div id="book-list-data"></div> 
+            </div>        
+          </div>
+        </div> 
+
+        <div id="book-select"></div>
+      </div>     
+        <div id="name-container"></div>
+        <canvas  style="background: #03A9F4; display: none" height="600" width="1080" id="canvas">         
+        </canvas>
+        <canvas style="background: #03A9F4; display: none" height="300" width="700" id="canvas2">          
+        </canvas>
+        <div width="700" id="vid-holder"></div>
+        <div id="buttons">
+          <div class="button" id="prev" onclick="prev()">◀</div>
+          <div class="button" id="next" onclick="next()">▶</div> 
+          <div class="button" id="rec" onclick="startRecording()">START</div>
+        </div>
+        <a id="download-button" download="jason">DOWNLOAD</a>
     </div>
-    <a id="download-button" download="jason">DOWNLOAD</a>
   </div>
 <!--   <script src="creds.js"></script>  -->
   <script src="recording.js"></script> 

@@ -2,26 +2,41 @@ var clickBooks = function(e){
   document.getElementById('book-list').style.display = "block";
 }
 
-var menu = document.getElementById('close-books');
-menu.addEventListener('click', function(e){
-  document.getElementById('book-list').style.display = "none";
+// var menu = document.getElementById('close-books');
+// menu.addEventListener('click', function(e){
+//   console.log('working')
+//   document.getElementById('book-list').style.display = "none";
+// })
+
+
+document.addEventListener('click', function(e){
+  var element = document.getElementById("book-list");
+  if(e.target.id === "close-books"){ 
+    element.style.display = 'none'
+  } 
 })
 
+var scrollWin = function() {
+    window.scrollTo(0, 1000);  
+}
+
 var bookSelector = document.querySelector('.container-input');
-// bookSelector.addEventListener('click', function(e){
-//   console.log('working')
-//  // document.getElementById('book-list').style.display = "none";
-// })
 
 var createBooksListHTML = function(bookList, bookCheckBoxes = {}){
   return bookList.reduce(function(string, book){
     var checked = "";
-    var id = book.substring(0,4) // book.replace(/ /g, "_");
+    var target = book.lastIndexOf('-');
+    var pages =  book.substring(target)
+    var id = book.substring(0,4) + pages // book.replace(/ /g, "_");
+    var imageId = book.substring(0,4) // book.replace(/ /g, "_");
     var bookTitle = book.substring(5);
     if(bookCheckBoxes[id] && bookCheckBoxes[id].checked === true){
       checked = 'checked'
     } 
-    string += '<label class="container">' +
+    string += '<div class="book-set">'+
+                '<img width="150" src="/assets/'+imageId+'/Image1.jpg" />'+
+                '<label class="container">' +
+
                 '<input'+
                   ' class="container-input"'+
                   ' id="'+ id +'"'+ 
@@ -31,7 +46,8 @@ var createBooksListHTML = function(bookList, bookCheckBoxes = {}){
                   '/>'+
                   '<span class="checkmark" ></span>'+
                   bookTitle +
-                  '</label>'            
+                  '</label>'  +
+              '</div>'
     return string;
   },'')
 }

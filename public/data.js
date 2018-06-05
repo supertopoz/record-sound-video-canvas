@@ -1,43 +1,3 @@
-const localData = {
-  "0000":{
-    "pages": 0,
-    "checked": false
-  },
-  "0001":{
-    "pages": 9
-  },
-  "0002":{
-    "pages": 11
-  },
-  "0003":{
-    "pages": 11
-  },
-  "0004":{
-    "pages": 13
-  },
-  "0012":{
-    "pages": 10
-  },
-  "0013":{
-    "pages": 11
-  },
-  "0014":{
-    "pages": 10
-  },
-  "0019":{
-    "pages": 10
-  },
-  "0020":{
-    "pages": 10
-  },
-  "0021":{
-    "pages": 9
-  },
-  "0022":{
-    "pages": 9
-  }
-}
-
 var getData = function () {
 //var spreadsheetID = "1vuwPqV4Ib1sTxFUPUsuCIeNqd8TJcMcZDcVM9b1sH5s";
 var spreadsheetID = "1tSHLkllPSvPOMebuyvm8wxzKFM6_1DG1btXAEfO68XA";
@@ -48,11 +8,13 @@ var bookUrl = "https://spreadsheets.google.com/feeds/list/" +
 
 
 var studentDetails = function(url){
-  console.log(new Date())
   return new Promise((resolve,reject)=> {
-    axios.get(url).then((x)=>{
-      console.log(x)
-      resolve(x)      
+    axios.get(url).then((data)=>{
+      var loader = document.getElementById('start-loader');
+      var vidSound = document.getElementById('vidSound');
+      loader.style.display = 'none';
+      vidSound.style.display = 'grid';
+      resolve(data)      
     }).catch(err =>{
       reject(err)
     })
@@ -64,6 +26,7 @@ var bookDetails = function(url){
   return new Promise((resolve,reject)=>{
     fetch(url, function(x){
     }).then((x)=>{ 
+
       resolve(x)  
     }).catch(err =>{
       reject(err)
@@ -73,7 +36,6 @@ var bookDetails = function(url){
 
 // Promise.all([studentDetails(studentUrl)]).then(function(values){
 studentDetails(studentUrl).then(function(values){
-  console.log(new Date())
    var studentList = [];
    var bookList = [];
    var student = {}
@@ -82,8 +44,11 @@ studentDetails(studentUrl).then(function(values){
     studentList.push(studentName);
     student.name = studentName;
     student.books = [
-       item.gsx$previousbookcode.$t +"_"+ item.gsx$previousbook.$t,
-       item.gsx$currentbookcode.$t +"_"+ item.gsx$currentbook.$t
+       item.gsx$previousbookcode.$t +"_"+ item.gsx$previousbook.$t +"-" + 
+          item.gsx$pages.$t ,
+       item.gsx$currentbookcode.$t +"_"+ item.gsx$currentbook.$t + "-" +
+          item.gsx$pages_2.$t
+
     ]
 
     

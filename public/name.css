@@ -26,12 +26,13 @@ input {
     width:85%;
     height: 41px;
     border: none;
-    background: #308fce;
+    background: #03A9F4;
     color: white !important;
     font-family: roboto;
     letter-spacing: 2px;
     font-weight: 100;
     font-size: 12px;
+    text-align: center;
 }
 
 
@@ -64,10 +65,10 @@ input {
 
 
 .dropdown {
-    align-self: center;
+  /*  align-self: center;*/
     position: relative;
     display: inline-block;
-    background: #308fce;
+    background: #03A9F4;
     box-shadow: 1px 1px 1px #717070;
     height: 60px;
     cursor: pointer;
@@ -77,7 +78,7 @@ input {
 .dropdown-content {
     width: 100% !important;
     position: absolute;
-    background-color: #308fce;
+    background-color: #03A9F4;
     width: 150px;
     overflow: auto;
     overflow-x: hidden;
@@ -99,16 +100,22 @@ input {
 #name-container {
   display:grid;
   grid-gap: 10px;
-  padding: 10px;
+  align-self: center;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
-  background: #3498db;
-  height: 50px;
+  background: #03A9F4;
 }
+
+@media (max-width: 500px) {
+  #name-container {
+    padding: 0px;
+  }
+}
+
 .student-name {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    background: #308fce;
+    background: #039be0;
     color: white;
     padding: 14px;
     font-family: roboto;

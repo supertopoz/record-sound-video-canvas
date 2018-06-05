@@ -1,6 +1,31 @@
+/* Test Suite */
+#mocha{
+  max-width: 700px;
+  font-size: 12px;
+  border: 1px solid white;
+  margin: 0 auto;
+}
+
+/* Global Style */
+body{
+  background:#cecece00;
+}
+
+.wrapper {
+    display: grid;
+    margin: 0 auto;
+    max-width: 700px;
+    grid-gap: 5px;
+}
+
+
+
+
+
+/* Header */ 
 #header{
-    background: #9b59b6;
-    height: 51px;
+    background: #03A9F4;
+    min-height: 51px;
     color: white;
     text-align: center;
     font-size: 30px;
@@ -10,55 +35,76 @@
     font-weight: 100;
 }
 
-#mocha{
-  max-width: 700px;
-  font-size: 12px;
-  border: 1px solid white;
-  margin: 0 auto;
+@media (max-width: 500px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+
+  }
+  #header{
+    font-size: 20px;
+  }
 }
 
-body{
-  background:#D3D3D3;
-}
-
-.wrapper {
+.ui-wrapper{
     display: grid;
-    margin: 0 auto;
-    width: 700px;
-    grid-gap: 5px;
+    grid-template-rows: 70px 90px 3fr 0fr;
+}
+@media (max-width: 500px) {
+    .ui-wrapper{
+        display: grid;
+        grid-gap:5px;
+        grid-template-rows: 136px 58px 2fr 0fr;
+    }
 }
 
+
+/* Canvas */ 
 #canvas{
-  background-color: '#3498db !important';
+  background-color: '#03A9F4 !important';
 }
+
+#canvas2{
+  align-self:center;
+
+}
+
+video.recordedVid {
+    width: 700px;
+}
+
+@media (max-width: 500px) {
+  #canvas2{
+    align-self:center;
+    max-width: 96vw;
+  }
+  video.recordedVid{
+    width:95vw;
+  }
+}
+/* Drop down selectors */
 
 #selectors{
   display:grid;
   grid-gap: 20px;
   grid-template-columns: 1fr 1fr;
-  height: 70px;
+  grid-template-rows: 1fr 0fr;
   cursor: pointer;
 }
 
-#select-books{
-    color: white;
-    align-self: center;
-    padding-top: 23px;
-    font-family: roboto;
-    letter-spacing: 2px;
-    font-weight: 100;
-    cursor: pointer;
-    text-align: center;
-    background: #308fce;
-    box-shadow: 1px 1px 1px #717070;
-    height: 37px;
-    cursor: pointer;
-    font-size: 12px;
-
+@media (max-width: 500px) {
+  #selectors{
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0fr;
+    grid-gap: 8px;
+  }
 }
 
+
+
+
 #prev {
-    color: #3498db;
+    color: #03A9F4;
     border:none;
     font-size: 82px;
     cursor: pointer;
@@ -66,7 +112,7 @@ body{
 }
 
 #next {
-    color: #3498db;
+    color: #03A9F4;
     border:none;
     font-size: 82px;
     cursor: pointer;
@@ -86,6 +132,7 @@ body{
     text-align: center;
     padding-top: 25px;
     cursor: pointer;
+    width: 99%;
 }
 
 #buttons{
@@ -97,9 +144,8 @@ body{
 /* ---- The container of student books ---- */
 .container {
     display: block;
-    position: relative;
-    
-    padding-left: 35px;
+    position: relative;    
+    padding-left: 24px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 22px;
@@ -107,7 +153,21 @@ body{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    text-overflow: ellipsis; 
+    font-family: roboto;
+    letter-spacing: 1px;
+    font-weight: 100;
+    font-size: 12px;
+    color:white;
 }
+
+.book-set {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
+    grid-gap: 5px;
+}
+
 
 /* ---- book list ---- */
 
@@ -119,19 +179,20 @@ body{
   color:white;
 }
 
-
-
-
 #book-list{
-  position: absolute;
-  top: 10%;
+ /* position: absolute;*/
+  margin-top: -38px;
   display:grid;
-  background: #9b59b6;
+  background: #03A9F4;
   z-index: 100;
   padding: 10px;
   display: none;
-  left: calc(50% - 230px);
-  box-shadow: 7px 13px 20px 2px #191919;
+  box-shadow: 1px 1px 1px #717070;
+}
+
+div#book-list-data {
+    display: grid;
+    grid-gap: 12px;
 }
 
 #buttons{
@@ -140,16 +201,6 @@ body{
 
 .container{
 
-  white-space: nowrap; 
-  width: 400px; 
-  overflow: hidden;
-  text-overflow: ellipsis; 
-  font-family: roboto;
-  letter-spacing: 2px;
-  font-weight: 100;
-  font-size: 15px;
-  color:white;
-  height: 20px;
 }
 
 /* Hide the browser's default checkbox */
@@ -158,6 +209,23 @@ body{
     opacity: 1;
     cursor: pointer;
     display: none;
+}
+
+#vidSound{
+    background: #8BC34A;
+    height: 51px;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 2%;
+    font-family: roboto;
+    letter-spacing: 10px;
+    font-weight: 100;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #717070;
+    align-items: center;
+    align-self: center;
+    margin-top: 20%;
 }
 
 /* Create a custom checkbox */
@@ -186,7 +254,7 @@ body{
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-    background-color: #3498db;
+    background-color: #03A9F4;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -217,7 +285,7 @@ body{
 #download-button {
     color: white;
     box-shadow: 2px 2px 1px 0px #9E9E9E;
-    background: #308fce;
+    background: #03A9F4;
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 10px;

@@ -8,8 +8,6 @@ const updateData = Redux.createStore(rootReducer);
 updateData.subscribe(() => {
   
   var data = updateData.getState();
-  //console.log(data.books.images)
-  //console.log(data.books.list)
   setBottomBarVisibility(data.books.images.length)
   setNavButtons(data.books.slideNumber, data.books.images.length)
   updateCanvas(

@@ -1,0 +1,35 @@
+[debug] [2018-06-05T03:48:04.340Z] ----------------------------------------------------------------------
+[debug] [2018-06-05T03:48:04.355Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Jason\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2018-06-05T03:48:04.355Z] CLI Version:   3.17.6
+[debug] [2018-06-05T03:48:04.355Z] Platform:      win32
+[debug] [2018-06-05T03:48:04.355Z] Node Version:  v8.5.0
+[debug] [2018-06-05T03:48:04.356Z] Time:          Tue Jun 05 2018 12:48:04 GMT+0900 (Korea Standard Time)
+[debug] [2018-06-05T03:48:04.356Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-06-05T03:48:04.452Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-06-05T03:48:04.453Z] > authorizing via signed-in user
+[debug] [2018-06-05T03:48:04.457Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-06-05T03:48:04.457Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/0-ZNiaK0TcNd19cpBH4okDSZjX5VTp20QnVZvNzmm7ZCdD5PLm0XxUxO410wlhLy',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Jun 05 2018 12:48:04 GMT+0900 (Korea Standard Time)
+[debug] [2018-06-05T03:48:05.029Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-05T03:48:05.084Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/recordme-1404f  
+  
+ Tue Jun 05 2018 12:48:05 GMT+0900 (Korea Standard Time)
+[debug] [2018-06-05T03:48:06.175Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-05T03:48:06.176Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/recordme-1404f/tokens  
+  
+ Tue Jun 05 2018 12:48:06 GMT+0900 (Korea Standard Time)
+[debug] [2018-06-05T03:48:06.978Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'recordme-1404f'...
+[info] 
+[info] i  deploying hosting
+[info] i  hosting: preparing public directory for upload...
+[debug] [2018-06-05T03:48:21.033Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/recordme-1404f/uploads/-LED2mTwzy2-5EfB1-r-?fileCount=1051&message=  
+  
+ Tue Jun 05 2018 12:48:21 GMT+0900 (Korea Standard Time)
