@@ -10,10 +10,7 @@ var bookUrl = "https://spreadsheets.google.com/feeds/list/" +
 var studentDetails = function(url){
   return new Promise((resolve,reject)=> {
     axios.get(url).then((data)=>{
-      var loader = document.getElementById('start-loader');
-      var vidSound = document.getElementById('vidSound');
-      loader.style.display = 'none';
-      vidSound.style.display = 'grid';
+
       resolve(data)      
     }).catch(err =>{
       reject(err)
@@ -36,6 +33,10 @@ var bookDetails = function(url){
 
 // Promise.all([studentDetails(studentUrl)]).then(function(values){
 studentDetails(studentUrl).then(function(values){
+   var loader = document.getElementById('start-loader');
+   var vidSound = document.getElementById('vidSound');
+   loader.style.display = 'none';
+   vidSound.style.display = 'grid';
    var studentList = [];
    var bookList = [];
    var student = {}
