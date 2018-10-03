@@ -7,58 +7,53 @@ window.onload = function () {
  //newCanvas()
 };
 
-const renderButtons = () => {
+const createButtons = () => {
   var mainBody = document.getElementById('main-body');
   var startBtn = document.getElementById('vidSound');
   mainBody.style.display = 'grid'
   startBtn.style.display = 'none'
-
-
 }
 
+const injectNewAudio = (video, stream) => {
+    video.addEventListener('loadedmetadata', function () {
+      var options = { audioBitsPerSecond : 128000, videoBitsPerSecond : 2500000, mimeType : 'video/mp4', video: video }
+      video.play();
+      window.builder = new canvasRecorder(stream, options)
+      builder.initAudioStream(stream, video);
+    });
+}
 
-var newCanvas = function(){
-  // get audio stream from user's mic  
-  renderButtons()
-  
-  navigator.mediaDevices.getUserMedia({
-    audio: true,
-    video: true
-  }).then(function (stream) {
-
-    const video = document.createElement('video');
-    //video.srcObject = stream;
-     
-    try {
+const createVideo = (stream) => {
+    var video = document.createElement('video');
+    video.srcObject = stream;
+      try {
         video.srcObject = stream;
      } catch (error) {
         console.log(error)
         video.src = URL.createObjectURL(stream);
      }
     video.muted = true; 
-    video.addEventListener('loadedmetadata', function () {
-     // send out device stream, video element with stream attached.  
-     //initAudioStream(stream, video);
-     var options = {
-      audioBitsPerSecond : 128000,
-      videoBitsPerSecond : 2500000,
-      mimeType : 'video/mp4',
-      video: video
-    }
-    video.play();
-    window.builder = new BuildRecorder(stream, options)
-     builder.initAudioStream(stream, video);
-    });
+    injectNewAudio(video, stream)    
+}
+
+var newCanvas =() => {
+ createButtons();
+  navigator.mediaDevices.getUserMedia({
+    audio: true,
+    video: true
+  })
+  .then(function (stream) {
+   createVideo(stream)
+
   }).catch(function(error) {
     console.log('error', error);
   });
-
 }
 
 
 
 
-class BuildRecorder {
+class canvasRecorder {
   construtor(stream, video){
     this.stream = stream;
     this.video = video; 
@@ -117,11 +112,8 @@ class BuildRecorder {
 
   exportStream(e) {
   if (this.chunks.length) {
-    var blob = new Blob(this.chunks, {type: 'video/mp4'})
-   
+    var blob = new Blob(this.chunks)
     var vidURL = URL.createObjectURL(blob);
-    //blob.type = 'video/mp4';
-     sendXHR(blob);
     updateData.dispatch({type:'SET_DOWNLOAD_URL','value':vidURL});
     var vid = document.createElement('video');
     vid.controls = true;
@@ -153,32 +145,6 @@ class BuildRecorder {
     
   }
 }
-
-
-function sendXHR(blob){
-    //Envia bien blob, no interpretado
-//    var xhr = new XMLHttpRequest();
-    // var video = document.getElementById('');
-    // xhr.open('GET', video.src , true);
-    // xhr.responseType = 'blob';
-    // xhr.onload = function(e) {
-    // if (this.status == 200) {
-        // Note: .response instead of .responseText
-        ///var blob = new Blob([this.response], {type: 'video/mp4'});
-        console.log(blob.size/1024);
-        console.log(blob.type);
-        form = new FormData(),
-        request = new XMLHttpRequest();
-        form.append("myblob",blob,"Capture.mp4");
-        form.append("myname",'Capture');
-        request.open("POST","https://youtubev3-206805.appspot.com/upload",true);
-        request.send(form);
-    //   }
-    //};
-  //  xhr.send();
-}
-
-
 
 function startRecording() {
   var booklist = document.getElementById('book-list');
