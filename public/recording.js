@@ -19,7 +19,7 @@ const injectNewAudio = (video, stream) => {
       var options = { audioBitsPerSecond : 128000, videoBitsPerSecond : 2500000, mimeType : 'video/mp4', video: video }
       video.play();
       window.builder = new canvasRecorder(stream, options)
-      builder.initAudioStream(stream, video);
+      builder.initStreaming(stream, video);
     });
 }
 
@@ -52,104 +52,100 @@ var newCanvas =() => {
 
 
 
-
-class canvasRecorder {
-  construtor(stream, video){
-    this.stream = stream;
-    this.video = video; 
-    this.soundStream = '';
-    this.sourceNode = '';
-    this.recorder = '';
-    this.chunks = [];
-  }
-  initAudioStream(stream, video){
-    this.stream = stream;
-    this.video = video; 
-    //var audioCtx = new AudioContext();
-    // create a stream from our AudioContext
-    this.sourceNode = audioCtx.createMediaStreamSource(this.stream);
-    var dest = audioCtx.createMediaStreamDestination();
-    this.soundStream = dest.stream; 
-    this.sourceNode.connect(dest)
-      // inject sound and video into canvas. 
-    this.startCanvasAnim(); 
-  }
-
-  startCanvasAnim(){
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d'); 
-
+const  startCanvasAnim = (video) => {
+    
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d'); 
     const draw = () => { 
-    requestAnimationFrame(draw); 
-    ctx.fillRect(0, 0, ctx.height, ctx.width); 
-    ctx.fillStyle = '#03A9F4'; 
-      
-      var width = this.video.videoWidth /1.5;
-      var height = this.video.videoHeight/1.5;
-      ctx.drawImage(this.video, 10, 270, width,height); 
+      requestAnimationFrame(draw); 
+      ctx.fillRect(0, 0, ctx.height, ctx.width); 
+      ctx.fillStyle = '#03A9F4';       
+      var width = video.videoWidth /1.5;
+      var height = video.videoHeight/1.5;
+      ctx.drawImage(video, 10, 270, width,height); 
       cloneCanvas(canvas)
   };
   draw();
   }
 
-  startRecording(){
-    audioCtx.resume();
-    var recButton = document.getElementById('rec');
-    var recordStream = canvas.captureStream(30);
-      recButton.textContent = 'Stop';
-      recordStream.addTrack(this.soundStream.getAudioTracks()[0]);
-      this.recorder = new MediaRecorder(recordStream);
-      this.recorder.start();
-      this.recorder.ondataavailable = this.saveChunks;
-      this.recorder.chunks = [];
-      this.recorder.onstop = this.exportStream;
-      recButton.onclick = this.stopRecording.bind(this);
-  }
 
-  saveChunks(e) {
-    e.data.size &&  this.chunks.push(e.data);
-  }
-
-  exportStream(e) {
-  if (this.chunks.length) {
-    var blob = new Blob(this.chunks)
-    var vidURL = URL.createObjectURL(blob);
-    updateData.dispatch({type:'SET_DOWNLOAD_URL','value':vidURL});
-    var vid = document.createElement('video');
+  const addVidToDom =(vidURL) => {
+    let vid = document.createElement('video');
     vid.controls = true;
     vid.controlsList = "nodownload";
     vid.className = 'recordedVid'
     vid.src = vidURL;
-    vid.onend = function() {
-      URL.revokeObjectURL(vidURL);
-    }
-
+    vid.onend = function() { URL.revokeObjectURL(vidURL) }
     var canva = document.getElementById('vid-holder')
     canva.appendChild(vid);
     document.getElementById('buttons').style.display = "none";
-    document.getElementById('canvas').style.display = "none";
+    document.getElementById('canvas').style.display = "none";    
+  }
+
+  const exportStream = (e) => {
+    console.log(e)
+  if (e.currentTarget.chunks.length) {
+    const blob = new Blob(e.currentTarget.chunks)
+    const vidURL = URL.createObjectURL(blob);
+    updateData.dispatch({type:'SET_DOWNLOAD_URL','value':vidURL});
+    addVidToDom(vidURL);
   } else {
-    console.log('failed')
-    //document.body.insertBefore(document.createTextNode('no data saved'), canvas);
+    console.log('recording export failed')
   }
 }
-    stopRecording() {  
-      try{
-        this.recorder.stop();
-        var canvas2 = document.getElementById('canvas2');
-        canvas2.style.display = 'none'
-        reset();
+
+
+class canvasRecorder {
+  construtor(stream, video){
+    this.soundStream = '';
+    this.recorder = '';
+    this.chunks = [];
+  }
+
+  initStreaming(stream, video){
+    const sourceNode = audioCtx.createMediaStreamSource(stream);
+    const destination = audioCtx.createMediaStreamDestination();
+    this.soundStream = destination.stream; 
+    sourceNode.connect(destination)
+    startCanvasAnim(video); 
+  }
+
+  startRecording(){
+    // Start up recorder
+    audioCtx.resume();
+    // inject it into the canvas
+    var recordStream = canvas.captureStream(30);      
+    recordStream.addTrack(this.soundStream.getAudioTracks()[0]);
+    this.recorder = new MediaRecorder(recordStream);
+    this.recorder.start();
+    this.recorder.ondataavailable = function(e){ e.data.size &&  this.chunks.push(e.data)}
+    this.recorder.chunks = [];
+    this.recorder.onstop = function(e){ exportStream(e)};     
+  }
+
+  stopRecording() {  
+    try{
+      this.recorder.stop();
+      const canvas2 = document.getElementById('canvas2');
+      canvas2.style.display = 'none'
       } catch(e){
-        console.log(e)
-      }
-    
+      console.log(e)
+    }
   }
 }
+
+
+
+
 
 function startRecording() {
   var booklist = document.getElementById('book-list');
     booklist.style.display = 'none'
   window.builder.startRecording()
+};
+
+function stopRecording() {
+  window.builder.stopRecording()
 };
 
 function next(){
